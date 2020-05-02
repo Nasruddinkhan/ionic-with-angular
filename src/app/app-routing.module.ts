@@ -13,8 +13,17 @@ const routes: Routes = [
   },
   {
     path: 'employee',
-    loadChildren: () => import('./employee/employee.module').then( m => m.EmployeePageModule)
-  },
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./employee/employee.module').then( m => m.EmployeePageModule)
+      },
+      {
+        path: ':empID',
+        loadChildren: () => import('./employee/employee-details/employee-details.module').then( m => m.EmployeeDetailsPageModule)
+      }
+    ]
+  }
 ];
 
 @NgModule({
