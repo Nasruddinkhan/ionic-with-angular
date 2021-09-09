@@ -1,0 +1,140 @@
+<!--html>
+<body>
+  <a id='linkButton'>ClickMe</a>
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    toastr.options.timeOut = 1500; // 1.5s
+    toastr.info('Page Loaded!');
+    $('#linkButton').click(function() {
+       toastr.success('Click Button');
+    });
+  });
+  </script>
+</body>
+</html-->
+<!DOCTYPE HTML>
+<!--html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+
+<div class="container">
+<video  autoplay="autoplay" width="720px" height="480px" muted controls>
+	<source  src="http://localhost:9090/api/video/urdushayri" />
+</video>
+  
+</div>
+
+
+
+</body>
+</html-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+<script>
+function downloadCsv(){
+var html = document.querySelector("table").outerHTML;
+console.log(html);
+	htmlToCSV(html, "report.csv");
+
+}
+function htmlToCSV(html, filename) {
+	var data = [];
+	var rows = document.querySelectorAll("table tr");
+	for (var i = 0; i < rows.length; i++) {
+		var row = [], cols = rows[i].querySelectorAll("td, th");
+		for (var j = 0; j < cols.length; j++) {
+		        row.push(cols[j].innerText);
+                 }
+		data.push(row.join(",")); 		
+	}
+	downloadCSVFile(data.join("\n"), filename);
+}
+</script>
+<script>
+function downloadCSVFile(csv, filename) {
+	var csv_file, download_link;
+	csv_file = new Blob([csv], {type: "text/csv"});
+	download_link = document.createElement("a");
+	download_link.download = filename;
+	download_link.href = window.URL.createObjectURL(csv_file);
+	download_link.style.display = "none";
+	document.body.appendChild(download_link);
+	download_link.click();
+}
+</script>
+</head>
+<body>
+
+<h2>HTML Table</h2>
+
+<table class="table">
+  <tr>
+    <th>Company</th>
+    <th>Contact</th>
+    <th>Country</th>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+  </tr>
+  <tr>
+    <td>Ernst Handel</td>
+    <td>Roland Mendel</td>
+    <td>Austria</td>
+  </tr>
+  <tr>
+    <td>Island Trading</td>
+    <td>Helen Bennett</td>
+    <td>UK</td>
+  </tr>
+  <tr>
+    <td>Laughing Bacchus Winecellars</td>
+    <td>Yoshi Tannamuri</td>
+    <td>Canada</td>
+  </tr>
+  <tr>
+    <td>Magazzini Alimentari Riuniti</td>
+    <td>Giovanni Rovelli</td>
+    <td>Italy</td>
+  </tr>
+</table>
+<a href="#" onclick="downloadCsv()">CSV</a>
+
+</body>
+</html>
+
